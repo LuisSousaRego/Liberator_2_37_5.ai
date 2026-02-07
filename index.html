@@ -20,27 +20,24 @@
 
         body {
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #221D18;
             font-family: 'Google Sans Code', monospace;
             font-weight: 200;
             color: #F0A030;
             height: 100vh;
             box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow: hidden;
         }
 
         #terminal {
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
             width: 100%;
-            box-sizing: border-box;
-            font-size: 22px;
+            font-size: clamp(14px, 1.5vw, 22px);
             border-radius: 10px;
             border: 10px solid black;
             background: radial-gradient(circle,rgba(71, 35, 3, 1) 0%, rgba(35, 21, 7, 1) 100%);
@@ -48,6 +45,7 @@
 
         #chat {
             padding: 50px;
+            overflow: scroll;
         }
 
         /* Amber phosphor glow on text */
