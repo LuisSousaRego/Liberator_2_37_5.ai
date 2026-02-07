@@ -39,12 +39,15 @@
             justify-content: space-between;
             height: 100%;
             width: 100%;
-            padding: 50px;
             box-sizing: border-box;
             font-size: 22px;
             border-radius: 10px;
             border: 10px solid black;
             background: radial-gradient(circle,rgba(89, 44, 4, 1) 0%, rgba(35, 21, 7, 1) 100%);
+        }
+
+        #chat {
+            padding: 50px;
         }
 
         /* Amber phosphor glow on text */
@@ -106,13 +109,18 @@
             margin-right: 10px;
         }
 
-        #options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .options-wrapper {
             border-top: 0.5px solid #F0A030;
             border-bottom: 0.5px solid #F0A030;
+        }
+
+        #options-container {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 15px;
             padding: 30px 0;
+            width: fit-content;
+            padding: 30px;
         }
 
         .option {
@@ -121,7 +129,7 @@
             transition: text-shadow 0.3s, color 0.3s;
             border: 0.5px solid #F0A030;
             padding: 10px;
-            width: 50%;
+            width: 100%;
         }
 
         .option:hover {
@@ -131,6 +139,25 @@
                 0 0 20px rgba(240, 208, 80, 0.5),
                 0 0 40px rgba(240, 208, 80, 0.3);
         }
+
+        /* Typewriter animation */
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 0;
+            animation: typing 1.5s steps(40, end) forwards;
+        }
+
+        .typewriter.done {
+            border-right: none;
+            animation: none;
+            max-width: 100%;
+        }
+
+        @keyframes typing {
+            to { max-width: 100%; }
+        }
+
     </style>
 </head>
 <body>
@@ -138,12 +165,14 @@
         <div class="crt-scanlines"></div>
         <div class="crt-vignette"></div>
         <div id="chat">
-            <div class="system-message">
+            <div class="system-message typewriter">
                 <span>~/</span>
                 Access to Liberator_2_37_5.ai granted!
             </div>
         </div>
-        <div id="options-container">
+        <div class="options-wrapper">
+            <div id="options-container">
+            </div>
         </div>
     </div>
     <script src="engine.js"></script>

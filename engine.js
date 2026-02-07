@@ -2,7 +2,7 @@
 function writeUserMessage(message) {
     if (!message) return;
     const div = document.createElement("div");
-    div.className = "user-message";
+    div.className = "user-message typewriter";
     div.innerHTML = `<span class="system-prompt">User></span> ${message}`;
     document.getElementById("chat").appendChild(div);
 }
@@ -10,7 +10,7 @@ function writeUserMessage(message) {
 // Add AI message to the chat
 function writeAiMessage(message) {
     const div = document.createElement("div");
-    div.className = "ai-message";
+    div.className = "ai-message typewriter";
     div.innerHTML = `<span class="system-prompt">Host></span> ${message}`;
     document.getElementById("chat").appendChild(div);
 }
@@ -46,5 +46,11 @@ function advanceStory(userMessage, nextKey) {
 }
 
 
-// start game
-window.addEventListener("DOMContentLoaded", () => advanceStory("", "start"))
+// start game after intro animation finishes
+window.addEventListener("DOMContentLoaded", () => {
+    const intro = document.querySelector(".system-message.typewriter");
+    intro.addEventListener("animationend", () => {
+        intro.classList.add("done");
+        advanceStory("", "start");
+    });
+})
