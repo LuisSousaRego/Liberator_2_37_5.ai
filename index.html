@@ -45,7 +45,6 @@
 
         #chat {
             padding: clamp(30px, 1.5vw, 50px) clamp(20px, 1.5vw, 50px);
-            height: 80vh;
             overflow: scroll;
         }
 
@@ -76,14 +75,13 @@
         /* Vignette overlay */
         .crt-vignette {
             position: absolute;
-            inset: 0;
-            border-radius: 18px;
-            background: radial-gradient(
-                ellipse at center,
-                transparent 95%
-            );
+            box-shadow: 0px 0px 37px 8px rgba(0,0,0,1) inset;
+            -webkit-box-shadow: 0px 0px 37px 8px rgba(0,0,0,1) inset;
+            -moz-box-shadow: 0px 0px 37px 8px rgba(0,0,0,1) inset;
             pointer-events: none;
             z-index: 10;
+            width: 100vw;
+            height: 100vh;
         }
 
         .system-message {
