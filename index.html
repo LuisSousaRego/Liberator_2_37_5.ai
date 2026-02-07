@@ -20,40 +20,89 @@
 
         body {
             margin: 0;
-            background-color: #272727;
+            padding: 20px;
+            background-color: #221D18;
             font-family: 'Google Sans Code', monospace;
             font-weight: 200;
+            color: #F0A030;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
         #terminal {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100vh;
+            height: 100%;
+            width: 100%;
             padding: 50px;
             box-sizing: border-box;
             font-size: 22px;
+            border-radius: 10px;
+            border: 10px solid black;
+            background: radial-gradient(circle,rgba(89, 44, 4, 1) 0%, rgba(35, 21, 7, 1) 100%);
+        }
+
+        /* Amber phosphor glow on text */
+        .crt-glow {
+            text-shadow:
+                0 0 5px rgba(212, 160, 23, 0.6),
+                0 0 15px rgba(212, 160, 23, 0.3),
+                0 0 30px rgba(212, 160, 23, 0.15);
+        }
+
+        /* Scanlines overlay */
+        .crt-scanlines {
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 2px,
+                rgba(0, 0, 0, 0.15) 2px,
+                rgba(0, 0, 0, 0.15) 4px
+            );
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Vignette overlay */
+        .crt-vignette {
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 95%
+            );
+            pointer-events: none;
+            z-index: 10;
         }
 
         .system-message {
-            color: gray;
+            color: #A08030;
             margin-bottom: 40px;
             font-weight: 300;
             font-size: 20px;
         }
 
         .ai-message {
-            color: #9CD9F0;
+            color: #F0A030;
             margin-bottom: 15px;
         }
 
         .user-message {
-            color: #CDEE69;
+            color: #FFD060;
             margin-bottom: 15px;
         }
 
         .system-prompt {
-            color: #CDEE69;
+            color: #FFD060;
             margin-right: 10px;
         }
 
@@ -61,23 +110,33 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            border-top: 0.5px solid #9CD9F0;
-            border-bottom: 0.5px solid #9CD9F0;
+            border-top: 0.5px solid #F0A030;
+            border-bottom: 0.5px solid #F0A030;
             padding: 30px 0;
         }
 
         .option {
-            color: #9CD9F0;
+            color: #F0A030;
             cursor: pointer;
-            transition: color 0.3s;
-            border: 0.5px solid #9CD9F0;
+            transition: text-shadow 0.3s, color 0.3s;
+            border: 0.5px solid #F0A030;
             padding: 10px;
             width: 50%;
+        }
+
+        .option:hover {
+            color: #f0d050;
+            text-shadow:
+                0 0 8px rgba(240, 208, 80, 0.8),
+                0 0 20px rgba(240, 208, 80, 0.5),
+                0 0 40px rgba(240, 208, 80, 0.3);
         }
     </style>
 </head>
 <body>
-    <div id="terminal">
+    <div id="terminal" class="crt-bezel crt-glow">
+        <div class="crt-scanlines"></div>
+        <div class="crt-vignette"></div>
         <div id="chat">
             <div class="system-message">
                 <span>~/</span>

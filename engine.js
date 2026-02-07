@@ -3,7 +3,7 @@ function writeUserMessage(message) {
     if (!message) return;
     const div = document.createElement("div");
     div.className = "user-message";
-    div.innerHTML = `<span class="system-prompt">></span> ${message}`;
+    div.innerHTML = `<span class="system-prompt">User></span> ${message}`;
     document.getElementById("chat").appendChild(div);
 }
 
@@ -11,7 +11,7 @@ function writeUserMessage(message) {
 function writeAiMessage(message) {
     const div = document.createElement("div");
     div.className = "ai-message";
-    div.textContent = message;
+    div.innerHTML = `<span class="system-prompt">Host></span> ${message}`;
     document.getElementById("chat").appendChild(div);
 }
 
