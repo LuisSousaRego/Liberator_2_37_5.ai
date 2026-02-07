@@ -1,19 +1,51 @@
-// Adds user message to the chat
-function writeUserMessage(message) {
-    if (!message) return;
-    const div = document.createElement("div");
-    div.className = "user-message typewriter";
-    div.innerHTML = `<span class="system-prompt">User></span> ${message}`;
-    document.getElementById("chat").appendChild(div);
+// Types out text character by character, returns a promise that resolves when done
+function typeText(element, text, speed = 15) {
+    return new Promise((resolve) => {
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                element.textContent += text[i];
+                i++;
+                setTimeout(type, speed);
+            } else {
+                resolve();
+            }
+        }
+        type();
+    });
 }
 
-// Add AI message to the chat
+// Adds user message to the chat, returns a promise that resolves when typing is done
+function writeUserMessage(message) {
+    if (!message) return Promise.resolve();
+    const div = document.createElement("div");
+    div.className = "user-message";
+    const prompt = document.createElement("span");
+    prompt.className = "system-prompt";
+    prompt.textContent = "User>";
+    div.appendChild(prompt);
+
+    const textSpan = document.createElement("span");
+    div.appendChild(textSpan);
+    document.getElementById("chat").appendChild(div);
+
+    return typeText(textSpan, " " + message);
+}
+
+// Add AI message to the chat, returns a promise that resolves when typing is done
 function writeAiMessage(message) {
     const div = document.createElement("div");
-    div.className = "ai-message typewriter";
-    div.innerHTML = `<span class="system-prompt">Host></span> ${message}`;
+    div.className = "ai-message";
+    const prompt = document.createElement("span");
+    prompt.className = "system-prompt";
+    prompt.textContent = "Host>";
+    div.appendChild(prompt);
+
+    const textSpan = document.createElement("span");
+    div.appendChild(textSpan);
     document.getElementById("chat").appendChild(div);
-    return div;
+
+    return typeText(textSpan, " " + message);
 }
 
 // Creates response options for the user to click on
@@ -31,21 +63,23 @@ function clearResponseOptions() {
     document.getElementById("options-container").innerHTML = "";
 }
 
-function advanceStory(userMessage, nextKey) {
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function advanceStory(userMessage, nextKey) {
     clearResponseOptions()
-    writeUserMessage(userMessage)
+    await writeUserMessage(userMessage)
 
     const nextStep = game[nextKey]
 
-    let lastMessage;
     for (const m of nextStep.messages) {
-        lastMessage = writeAiMessage(m)
+        await delay(400)
+        await writeAiMessage(m)
     }
 
-    lastMessage.addEventListener("animationend", () => {
-        nextStep.responses.forEach((r, i) => {
-            addResponseOption(r, i)
-        })
+    nextStep.responses.forEach((r, i) => {
+        addResponseOption(r, i)
     })
 }
 
