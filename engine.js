@@ -1,20 +1,36 @@
+// Adds user message to the chat
 function writeUserMessage(message) {
-
+    if (!message) return;
+    const div = document.createElement("div");
+    div.className = "user-message";
+    div.innerHTML = `<span class="system-prompt">></span> ${message}`;
+    document.getElementById("chat").appendChild(div);
 }
 
+// Add AI message to the chat
 function writeAiMessage(message) {
-
+    const div = document.createElement("div");
+    div.className = "ai-message";
+    div.textContent = message;
+    document.getElementById("chat").appendChild(div);
 }
 
-function addResponseOption(responses) {
-
+// Creates response options for the user to click on
+function addResponseOption(response) {
+    const div = document.createElement("div");
+    div.className = "option";
+    div.textContent = response.message;
+    div.addEventListener("click", () => advanceStory(response.message, response.next));
+    document.getElementById("options-container").appendChild(div);
 }
 
+// Clears the response options from the previous step
 function clearResponseOptions() {
-
+    document.getElementById("options-container").innerHTML = "";
 }
 
 function advanceStory(userMessage, nextKey) {
+    clearResponseOptions()
     writeUserMessage(userMessage)
 
     const nextStep = game[nextKey]
@@ -23,7 +39,6 @@ function advanceStory(userMessage, nextKey) {
         writeAiMessage(m)
     }
 
-    clearResponseOptions()
 
     for (const r of nextStep.responses) {
         addResponseOption(r)
@@ -32,4 +47,4 @@ function advanceStory(userMessage, nextKey) {
 
 
 // start game
-advanceStory("", "start")
+window.addEventListener("DOMContentLoaded", () => advanceStory("", "start"))

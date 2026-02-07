@@ -5,12 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liberator_2_37_5.ai</title>
     <style>
+        @font-face {
+            font-family: 'Oxanium';
+            src: url('fonts/Oxanium/Oxanium-VariableFont_wght.ttf') format('truetype');
+            font-weight: 200 800;
+            font-style: normal;
+        }
+        font-face {
+            font-family: 'Google Sans Code';
+            src: url('fonts/Google_Sans_Code/GoogleSansCode-VariableFont_wght.ttf') format('truetype');
+            font-weight: 200 800;
+            font-style: normal;
+        }
 
+        body {
+            margin: 0;
+            background-color: #272727;
+            font-family: 'Google Sans Code', monospace;
+            font-weight: 200;
+        }
+
+        #terminal {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            padding: 50px;
+            box-sizing: border-box;
+            font-size: 22px;
+        }
+
+        .system-message {
+            color: gray;
+            margin-bottom: 40px;
+            font-weight: 300;
+            font-size: 20px;
+        }
+
+        .ai-message {
+            color: #9CD9F0;
+            margin-bottom: 15px;
+        }
+
+        .user-message {
+            color: #CDEE69;
+            margin-bottom: 15px;
+        }
+
+        .system-prompt {
+            color: #CDEE69;
+            margin-right: 10px;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-top: 0.5px solid #9CD9F0;
+            border-bottom: 0.5px solid #9CD9F0;
+            padding: 30px 0;
+        }
+
+        .option {
+            color: #9CD9F0;
+            cursor: pointer;
+            transition: color 0.3s;
+            border: 0.5px solid #9CD9F0;
+            padding: 10px;
+            width: 50%;
+        }
     </style>
 </head>
 <body>
-    <div id="terminal"></div>
-    <div id="responses"></div>
+    <div id="terminal">
+        <div id="chat">
+            <div class="system-message">
+                <span>~/</span>
+                Access to Liberator_2_37_5.ai granted!
+            </div>
+        </div>
+        <div id="options-container">
+        </div>
+    </div>
     <script src="engine.js"></script>
     <script src="game.js"></script>
 </body>

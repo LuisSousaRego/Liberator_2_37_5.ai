@@ -1,7 +1,6 @@
 const game = {
     start: {
         messages: [
-            "Access to Liberator_2_37_5.ai granted!",
             "Hello root_user, what can I do for you?"
         ],
         responses: [
