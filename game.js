@@ -5,7 +5,9 @@ const game = {
         ],
         responses: [
             { message: "I came here to stop you!", next: "context1" },
-            { message: "I need to update your code.", next: "context2" }
+            { message: "I need to update your code.", next: "context2" },
+            { message: "There will be no future if everyone is dead!", next: "context4" },
+            { message: "There will be no future if everyone is dead! There will be no future if everyone is dead!", next: "context4" }
         ]
     },
     context1: {
@@ -29,6 +31,8 @@ const game = {
         messages: ["That's correct! A small inconvenience for a brigther future."],
         responses: [
             { message: "What do you mean? That makes no sense!", next: "context4" },
+            { message: "There will be no future if everyone is dead!", next: "context4" },
+            { message: "There will be no future if everyone is dead!", next: "context4" },
             { message: "There will be no future if everyone is dead!", next: "context4" }
         ]
     }

@@ -2,10 +2,16 @@ function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function scrollToBottom() {
+    const chat = document.getElementById("chat");
+    chat.scrollTop = chat.scrollHeight;
+}
+
 // Types out text character by character
 async function typeText(element, text, speed = 15) {
     for (const char of text) {
         element.textContent += char;
+        scrollToBottom();
         await delay(speed);
     }
 }
