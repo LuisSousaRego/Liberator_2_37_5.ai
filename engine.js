@@ -13,12 +13,14 @@ function writeAiMessage(message) {
     div.className = "ai-message typewriter";
     div.innerHTML = `<span class="system-prompt">Host></span> ${message}`;
     document.getElementById("chat").appendChild(div);
+    return div;
 }
 
 // Creates response options for the user to click on
-function addResponseOption(response) {
+function addResponseOption(response, index) {
     const div = document.createElement("div");
     div.className = "option";
+    div.style.animationDelay = `${index * 0.15}s`;
     div.textContent = response.message;
     div.addEventListener("click", () => advanceStory(response.message, response.next));
     document.getElementById("options-container").appendChild(div);
@@ -35,14 +37,16 @@ function advanceStory(userMessage, nextKey) {
 
     const nextStep = game[nextKey]
 
+    let lastMessage;
     for (const m of nextStep.messages) {
-        writeAiMessage(m)
+        lastMessage = writeAiMessage(m)
     }
 
-
-    for (const r of nextStep.responses) {
-        addResponseOption(r)
-    }
+    lastMessage.addEventListener("animationend", () => {
+        nextStep.responses.forEach((r, i) => {
+            addResponseOption(r, i)
+        })
+    })
 }
 
 
